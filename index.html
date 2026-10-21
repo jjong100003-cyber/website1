@@ -1,0 +1,357 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>소요상점</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* 레이아웃: 풀블리드 사진 히어로 → 교차 섹션 → 어두운 마감 CTA. 따뜻한 단일 룩(저녁 조명) */
+:root{color-scheme:light;
+  --cream:#F6F0E6; --sand:#EDE3D3; --brown:#2B211B; --amber:#B7712F; --olive:#6F7A5A; --night:#1E1713;
+  --muted:#6B5D52; --header-h:64px;
+  --serif:'Noto Serif KR',serif; --sans:'Noto Sans KR',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + env(safe-area-inset-top,0px))}
+body{min-width:0;font-family:var(--sans);background:var(--cream);color:var(--brown);line-height:1.75;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+ul{list-style:none}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--brown);color:var(--cream);padding:10px 14px;z-index:100;border-radius:8px}
+.skip:focus{left:8px}
+
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.35}
+.eyebrow{font-family:var(--serif);letter-spacing:.32em;font-size:.78rem;text-transform:uppercase;color:var(--sand);margin-bottom:18px}
+.eyebrow.dark{color:var(--amber)}
+
+/* header */
+.site-header{position:fixed;inset:0 0 auto 0;height:calc(var(--header-h) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,56px);z-index:50;color:var(--cream);transition:background .4s,color .4s,box-shadow .4s}
+.site-header.scrolled{background:rgba(246,240,230,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--brown);box-shadow:0 1px 0 rgba(43,33,27,.08)}
+.logo{text-decoration:none;font-family:var(--serif);font-weight:600;letter-spacing:.28em;font-size:1.05rem;display:flex;align-items:baseline;gap:10px}
+.logo span{font-family:var(--sans);letter-spacing:.02em;font-size:.82rem;font-weight:500;opacity:.85}
+.site-header nav{display:flex;gap:6px}
+.site-header nav a{text-decoration:none;font-size:.95rem;padding:10px 14px;min-height:44px;display:inline-flex;align-items:center}
+.site-header nav .nav-buy{border:1px solid currentColor;border-radius:8px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 28px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;transition:transform .25s,background .25s;border:0;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-amber{background:var(--amber);color:#fff}
+.btn-amber:hover{background:#A2631F}
+.btn-brown{background:var(--brown);color:var(--cream);width:100%}
+.btn-brown:hover{background:#3d2e25}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--cream);overflow:hidden}
+.hero picture,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,23,19,.45) 0%,rgba(30,23,19,.1) 35%,rgba(30,23,19,.72) 100%)}
+.hero-copy{position:relative;padding:0 clamp(20px,6vw,80px) clamp(64px,12vh,120px);max-width:760px}
+.hero h1{font-size:clamp(2.3rem,7vw,4.4rem);margin-bottom:22px}
+.hero .sub{font-size:clamp(1rem,2.4vw,1.2rem);margin-bottom:32px;opacity:.95}
+
+.section{padding:clamp(80px,9vw,120px) clamp(20px,6vw,80px)}
+.section-head{max-width:1120px;margin:0 auto 56px;text-align:center}
+.section-head h2{font-size:clamp(1.6rem,4vw,2.4rem)}
+
+/* about */
+.about-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+.about h2{font-size:clamp(1.9rem,4.6vw,2.9rem);margin-bottom:28px}
+.about p{margin-bottom:18px;color:#3d3128;max-width:30em}
+.about .pull{font-family:var(--serif);font-size:1.3rem;margin:26px 0;color:var(--brown)}
+.about .pull strong{color:var(--amber);font-weight:600}
+.about-img img{border-radius:8px;width:100%}
+@media(min-width:900px){.about-grid{grid-template-columns:1fr 1.1fr;gap:80px}}
+
+/* strip */
+.strip{background:var(--sand);padding:36px clamp(20px,6vw,80px)}
+.strip ul{max-width:1120px;margin:0 auto;display:grid;gap:22px;text-align:center}
+.strip b{display:block;font-family:var(--serif);font-size:1.1rem}
+.strip span{font-size:.9rem;color:var(--muted)}
+@media(min-width:760px){.strip ul{grid-template-columns:repeat(3,1fr)}.strip li+li{border-left:1px solid rgba(43,33,27,.18)}}
+
+/* products */
+.cards{max-width:1160px;margin:0 auto;display:grid;gap:28px;grid-template-columns:1fr}
+@media(min-width:900px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{position:relative;background:var(--sand);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.badge{position:absolute;top:14px;left:14px;z-index:2;background:var(--olive);color:#fff;font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px}
+.card-body{padding:24px 24px 28px;display:flex;flex-direction:column;flex:1}
+.tag{font-family:var(--serif);letter-spacing:.14em;color:var(--amber);font-size:.8rem;margin-bottom:4px;font-weight:600}
+.card h3{font-size:1.25rem;margin-bottom:8px}
+.desc{color:#4a3d33;font-size:.95rem;margin-bottom:14px}
+.spec{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.spec li{font-size:.82rem;background:var(--cream);padding:4px 10px;border-radius:999px}
+.price{font-family:var(--serif);font-size:1.3rem;margin:auto 0 16px}
+
+/* reviews */
+.reviews{background:var(--cream)}
+.review-row{max-width:1120px;margin:0 auto;display:grid;gap:24px;grid-template-columns:repeat(3,1fr)}
+.review{background:var(--sand);border-radius:8px;padding:22px}
+.photo-slot{aspect-ratio:4/3;border-radius:6px;background:repeating-linear-gradient(45deg,#e4d8c4,#e4d8c4 10px,#eadfcd 10px,#eadfcd 20px);display:grid;place-items:center;color:var(--muted);font-size:.8rem;margin-bottom:18px}
+.review blockquote{font-family:var(--serif);font-size:1.05rem;line-height:1.7;margin-bottom:14px}
+.review figcaption{font-size:.85rem;color:var(--muted)}
+@media(max-width:759px){
+  .review-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin:0 calc(-1*clamp(20px,6vw,80px));padding:0 clamp(20px,6vw,80px) 8px}
+  .review{flex:0 0 82%;scroll-snap-align:center}
+}
+
+/* faq */
+.faq{background:var(--sand)}
+.acc{max-width:760px;margin:0 auto}
+details{border-bottom:1px solid rgba(43,33,27,.18)}
+summary{cursor:pointer;list-style:none;padding:22px 40px 22px 0;min-height:56px;font-weight:700;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:1.5rem;color:var(--amber);font-weight:400}
+details[open] summary::after{content:'–'}
+details p{padding:0 0 24px;color:#3d3128}
+
+/* closing cta */
+.cta{position:relative;background:var(--night);color:var(--cream);min-height:80svh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.cta picture,.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.cta::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(30,23,19,.25),rgba(30,23,19,.85))}
+.cta-inner{position:relative;z-index:2;padding:96px 24px}
+.cta h2{font-size:clamp(2rem,6vw,3.6rem);margin-bottom:36px}
+
+/* footer */
+.site-footer{background:var(--night);color:#b9ab9b;padding:48px clamp(20px,6vw,80px) 110px;font-size:.82rem;line-height:1.9;border-top:1px solid rgba(246,240,230,.1)}
+.site-footer .f-logo{font-family:var(--serif);letter-spacing:.24em;color:var(--cream);font-size:1rem;margin-bottom:12px}
+.site-footer .links a{margin-right:16px;text-decoration:none;display:inline-block;min-height:44px;line-height:44px}
+.site-footer .copy{margin-top:8px;opacity:.7}
+
+/* sticky mobile buy */
+.sticky-buy{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(246,240,230,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:40;transition:transform .4s,opacity .4s;box-shadow:0 -1px 0 rgba(43,33,27,.1)}
+.sticky-buy .btn{width:100%}
+.sticky-buy.hide{transform:translateY(110%);opacity:0;pointer-events:none}
+@media(min-width:760px){.sticky-buy{display:none}.site-footer{padding-bottom:48px}}
+
+/* 촛불처럼 느린 페이드인 */
+.fade{opacity:0;transform:translateY(18px);transition:opacity 900ms ease,transform 900ms ease}
+.fade.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .fade{opacity:1;transform:none}
+}
+@media(max-width:759px){.hero picture,.hero img{object-position:88% 50%}}
+@media(max-width:759px){.hero-shade{background:linear-gradient(180deg,rgba(30,23,19,.45) 0%,rgba(30,23,19,.15) 30%,rgba(30,23,19,.82) 100%)}}
+
+</style>
+<a class="skip" href="#products">본문 바로가기</a>
+
+<header class="site-header" id="top">
+  <a class="logo" href="#top" aria-label="소요상점 홈">SOYO<span>소요상점</span></a>
+  <nav aria-label="주요 메뉴">
+    <a href="#products">상품</a>
+    <a href="#reviews">후기</a>
+    <a href="#cta" class="nav-buy">구매</a>
+  </nav>
+</header>
+
+<main>
+  <!-- 1. HERO -->
+  <section class="hero">
+    <img src="images/hero.webp" width="1600" height="1067" alt="햇살이 드는 나무 테이블 위에서 불을 밝힌 소요상점 캔들과 디퓨저" fetchpriority="high">
+    <div class="hero-shade"></div>
+    <div class="hero-copy fade">
+      <p class="eyebrow">SOYO SANGJEOM</p>
+      <h1>하루의 끝,<br>향으로 정리하다.</h1>
+      <p class="sub">소이왁스 100%로 한 점씩 손으로 만드는 캔들과 디퓨저.</p>
+      <a class="btn btn-amber" href="#products">오늘 밤의 향 고르기</a>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT -->
+  <section class="about section" id="about">
+    <div class="about-grid">
+      <div class="about-text fade">
+        <p class="eyebrow dark">ABOUT</p>
+        <h2>밤을 정리하는<br>작은 습관</h2>
+        <p>퇴근 후 현관에 서면 하루가 아직 어깨에 남아 있어요. 불을 하나 켜고, 향을 하나 두는 일. 소요상점은 그 단순한 순서를 만들어요.</p>
+        <p class="pull"><strong>15분</strong>, <strong>하나의 불빛</strong>이면 충분해요.</p>
+        <p>화려한 향보다 오래 곁에 둘 수 있는 향을 고르고, 한 점씩 손으로 부어 만들어요.</p>
+      </div>
+      <figure class="about-img fade">
+        <img src="images/about.webp" width="1000" height="667" loading="lazy" alt="나무 작업대 위에서 소이왁스를 병에 붓는 제작 장면">
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3. 특장 스트립 -->
+  <section class="strip" aria-label="소요상점의 만드는 방식">
+    <ul>
+      <li><b>소이왁스 100%</b><span>식물성 왁스만 사용해요</span></li>
+      <li><b>손으로 한 점씩</b><span>작업대에서 직접 부어요</span></li>
+      <li><b>주문 후 3일 이내 발송</b><span>제작 후 바로 보내요</span></li>
+    </ul>
+  </section>
+
+  <!-- 4. PRODUCTS -->
+  <section class="products section" id="products">
+    <div class="section-head fade">
+      <p class="eyebrow dark">PRODUCTS</p>
+      <h2>오늘 밤, 어떤 향이 좋을까요</h2>
+    </div>
+    <div class="cards">
+      <article class="card fade">
+        <img src="images/candle.webp" width="800" height="800" loading="lazy" alt="시그니처 캔들. 나무 접시 위에서 불이 켜진 우드 앤 머스크 캔들">
+        <div class="card-body">
+          <p class="tag">시그니처 캔들</p>
+          <h3>우드 앤 머스크 캔들</h3>
+          <p class="desc">향이 세지 않아 침실에서도 편안해요.</p>
+          <ul class="spec"><li>소이왁스 100%</li><li>6시간 연소</li></ul>
+          <p class="price">00,000원</p>
+          <a class="btn btn-brown" href="#cta" data-buy="시그니처 캔들">구매하기</a>
+        </div>
+      </article>
+
+      <article class="card fade">
+        <img src="images/diffuser.webp" width="800" height="800" loading="lazy" alt="무드 디퓨저. 햇살이 드는 우드 테이블 위의 시더우드 디퓨저">
+        <div class="card-body">
+          <p class="tag">무드 디퓨저</p>
+          <h3>시더우드 리드 디퓨저</h3>
+          <p class="desc">현관과 거실에 오래 머무는 향이에요.</p>
+          <ul class="spec"><li>약 3개월 지속</li><li>리드 스틱 8개</li></ul>
+          <p class="price">00,000원</p>
+          <a class="btn btn-brown" href="#cta" data-buy="무드 디퓨저">구매하기</a>
+        </div>
+      </article>
+
+      <article class="card fade">
+        <span class="badge">포장 무료 · 카드 문구 각인</span>
+        <img src="images/giftset.webp" width="800" height="800" loading="lazy" alt="3종 선물세트. 리본과 소요 씰을 단 박스 안의 시그니처, 시더, 화이트머스크 캔들">
+        <div class="card-body">
+          <p class="tag">선물세트</p>
+          <h3>캔들 3종 선물세트</h3>
+          <p class="desc">시그니처 · 시더 · 화이트머스크. 실패 없는 선물이에요.</p>
+          <ul class="spec"><li>캔들 3종</li><li>선물 포장 무료</li></ul>
+          <p class="price">00,000원</p>
+          <a class="btn btn-brown" href="#cta" data-buy="3종 선물세트">구매하기</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 5. REVIEWS -->
+  <section class="reviews section" id="reviews">
+    <div class="section-head fade">
+      <p class="eyebrow dark">REVIEWS</p>
+      <h2>먼저 켜 본 분들의 이야기</h2>
+    </div>
+    <!-- 주의: 아래 문구는 기존 페이지 후기 키워드 기반 임시 문구입니다. 실제 후기 원문과 이름 마스킹으로 교체하세요. -->
+    <div class="review-row">
+      <figure class="review fade">
+        <div class="photo-slot" aria-hidden="true">후기 사진</div>
+        <blockquote>퇴근하고 불 켜는 게 하루의 낙이 됐어요.</blockquote>
+        <figcaption>김○연 · 시그니처 캔들</figcaption>
+      </figure>
+      <figure class="review fade">
+        <div class="photo-slot" aria-hidden="true">후기 사진</div>
+        <blockquote>침실에 두기 좋은, 부담 없는 향이에요.</blockquote>
+        <figcaption>이○진 · 무드 디퓨저</figcaption>
+      </figure>
+      <figure class="review fade">
+        <div class="photo-slot" aria-hidden="true">후기 사진</div>
+        <blockquote>집들이 선물로 드렸는데 반응이 좋았어요.</blockquote>
+        <figcaption>박○수 · 3종 선물세트</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 6. 배송 · FAQ -->
+  <section class="faq section" id="faq">
+    <div class="section-head fade">
+      <p class="eyebrow dark">DELIVERY &amp; FAQ</p>
+      <h2>마지막으로 궁금하실 만한 것</h2>
+    </div>
+    <div class="acc fade">
+      <details open>
+        <summary>배송은 얼마나 걸리나요</summary>
+        <p>주문 후 3일 이내에 제작해 발송해요. 5만원 이상 구매하면 배송비는 무료예요.</p>
+      </details>
+      <details>
+        <summary>교환·반품이 되나요</summary>
+        <p>수령 후 7일 이내에 문의해 주세요. 사용한 제품은 교환·반품이 어려워요. 상세 기준은 확정 후 안내해요.</p>
+      </details>
+      <details>
+        <summary>선물 카드에 문구를 넣을 수 있나요</summary>
+        <p>선물세트는 포장이 무료이고, 카드에 원하시는 문구를 각인해 드려요. 주문 시 요청란에 적어 주세요.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 7. 마감 CTA -->
+  <section class="cta" id="cta">
+    <img src="images/night.webp" width="1600" height="1067" loading="lazy" alt="어두운 방, 나무 접시 위에서 타오르는 캔들 불빛">
+    <div class="cta-inner fade">
+      <h2>오늘 밤부터<br>시작해도 됩니다.</h2>
+      <a class="btn btn-amber" href="#cta" data-buy="마감 CTA">지금 구매하기</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p class="f-logo">SOYO 소요상점</p>
+  <p>상호 : 소요상점 · 대표 : (입력) · 사업자등록번호 : (확정 후 입력)</p>
+  <p>통신판매업 신고번호 : (확정 후 입력) · 고객센터 : (확정 후 입력)</p>
+  <p>주소 : (확정 후 입력)</p>
+  <p class="links"><a href="#">이용약관</a> <a href="#">개인정보처리방침</a></p>
+  <p class="copy">© 2026 소요상점. All rights reserved.</p>
+</footer>
+
+<!-- 모바일 하단 고정 구매 바 -->
+<div class="sticky-buy" id="stickyBuy">
+  <a class="btn btn-amber" href="#products" data-buy="고정 바">오늘 밤의 향 고르기</a>
+</div>
+
+<script>
+/* ===== 설정: 확정되면 여기만 수정하세요 ===== */
+var STORE_URL = ""; // 예: "https://smartstore.naver.com/soyo" (비워두면 버튼이 마감 섹션/상품으로 이동)
+/* ======================================= */
+window.dataLayer = window.dataLayer || [];
+function track(name, params){ window.dataLayer.push(Object.assign({event:name}, params||{})); }
+
+document.querySelectorAll('[data-buy]').forEach(function(a){
+  var item = a.getAttribute('data-buy');
+  if (STORE_URL) {
+    var u = STORE_URL + (STORE_URL.indexOf('?')>-1?'&':'?') +
+      'utm_source=landing&utm_medium=button&utm_campaign=renewal&utm_content=' + encodeURIComponent(item);
+    a.setAttribute('href', u);
+  }
+  a.addEventListener('click', function(){ track('click_buy', {item_name:item}); });
+});
+
+/* 스크롤 등장 · 이벤트 */
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var fades = document.querySelectorAll('.fade');
+if (reduce || !('IntersectionObserver' in window)) {
+  fades.forEach(function(e){ e.classList.add('in'); });
+} else {
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.15});
+  fades.forEach(function(e){ io.observe(e); });
+}
+var seen = false;
+new IntersectionObserver(function(es,o){
+  if(es[0].isIntersecting && !seen){ seen = true; track('view_products'); o.disconnect(); }
+}, {threshold:0.3}).observe(document.getElementById('products'));
+var s75 = false;
+window.addEventListener('scroll', function(){
+  if(s75) return;
+  var d = document.documentElement;
+  if ((window.scrollY + window.innerHeight) / d.scrollHeight >= 0.75){ s75 = true; track('scroll_75'); }
+}, {passive:true});
+
+/* 헤더 블러 · 고정 바 숨김(마감 CTA 구간) */
+var header = document.querySelector('.site-header');
+var sticky = document.getElementById('stickyBuy');
+var cta = document.getElementById('cta');
+function onScroll(){
+  header.classList.toggle('scrolled', window.scrollY > 30);
+  var r = cta.getBoundingClientRect();
+  sticky.classList.toggle('hide', r.top < window.innerHeight || window.scrollY < window.innerHeight*0.6);
+}
+window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+</script>
+
+</body></html>
